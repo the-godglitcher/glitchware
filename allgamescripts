@@ -1,22 +1,57 @@
-
+-- Create the main ScreenGui
 local screenGui = Instance.new("ScreenGui")
-screenGui.Name = "SideButtonGui"
+screenGui.Name = "SidePanelGui"
 screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
+-- Create the toggle button
 local button = Instance.new("TextButton")
 button.Name = "SideButton"
 button.Parent = screenGui
-button.Size = UDim2.new(0, 100, 0, 100)  -- 100x100 pixels (a square)
-button.Position = UDim2.new(0, 20, 0.5, -50)  -- Left side, centered vertically
-button.BackgroundColor3 = Color3.fromRGB(0, 170, 255)  -- Nice blue
-button.Text = "Click Me!"
+button.Size = UDim2.new(0, 100, 0, 100)  -- Square button
+button.Position = UDim2.new(0, 20, 0.5, -50)  -- Left side center
+button.BackgroundColor3 = Color3.fromRGB(0, 170, 255)
+button.Text = "Menu"
 button.TextColor3 = Color3.fromRGB(255, 255, 255)
 button.Font = Enum.Font.SourceSansBold
-button.TextSize = 20
+button.TextSize = 22
 button.BorderSizePixel = 0
-button.AutoButtonColor = true
 
+-- Create the side panel
+local panel = Instance.new("Frame")
+panel.Name = "SidePanel"
+panel.Parent = screenGui
+panel.Size = UDim2.new(0, 200, 1, 0)  -- 200px wide, full height
+panel.Position = UDim2.new(0, -200, 0, 0)  -- Start hidden offscreen
+panel.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+panel.BorderSizePixel = 0
+
+-- Add a label inside the panel
+local label = Instance.new("TextLabel")
+label.Parent = panel
+label.Size = UDim2.new(1, 0, 0, 50)
+label.BackgroundTransparency = 1
+label.Text = "Hello, Glitchyz!"
+label.TextColor3 = Color3.fromRGB(255, 255, 255)
+label.Font = Enum.Font.SourceSansBold
+label.TextSize = 24
+
+-- Animation toggle variables
+local open = false
+local tweenService = game:GetService("TweenService")
+
+local tweenInfo = TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+
+-- Click event
 button.MouseButton1Click:Connect(function()
-	print("Button clicked!")
-	button.BackgroundColor3 = Color3.fromRGB(0, 255, 127) -- Change color when clicked
+	open = not open
+	
+	if open then
+		-- Slide panel in
+		local tween = tweenService:Create(panel, tweenInfo, {Position = UDim2.new(0, 0, 0, 0)})
+		tween:Play()
+	else
+		-- Slide panel out
+		local tween = tweenService:Create(panel, tweenInfo, {Position = UDim2.new(0, -200, 0, 0)})
+		tween:Play()
+	end
 end)
