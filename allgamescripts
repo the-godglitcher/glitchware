@@ -1,1 +1,22 @@
-est
+
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "SideButtonGui"
+screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+local button = Instance.new("TextButton")
+button.Name = "SideButton"
+button.Parent = screenGui
+button.Size = UDim2.new(0, 100, 0, 100)  -- 100x100 pixels (a square)
+button.Position = UDim2.new(0, 20, 0.5, -50)  -- Left side, centered vertically
+button.BackgroundColor3 = Color3.fromRGB(0, 170, 255)  -- Nice blue
+button.Text = "Click Me!"
+button.TextColor3 = Color3.fromRGB(255, 255, 255)
+button.Font = Enum.Font.SourceSansBold
+button.TextSize = 20
+button.BorderSizePixel = 0
+button.AutoButtonColor = true
+
+button.MouseButton1Click:Connect(function()
+	print("Button clicked!")
+	button.BackgroundColor3 = Color3.fromRGB(0, 255, 127) -- Change color when clicked
+end)
