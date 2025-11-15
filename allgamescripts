@@ -1,29 +1,9 @@
-local button = script.Parent
+local gui = Instance.new("ScreenGui", game.Players.LocalPlayer:WaitForChild("PlayerGui"))
+local btn = Instance.new("TextButton", gui)
+btn.Size = UDim2.new(0,200,0,50)
+btn.Position = UDim2.new(0.5,-100,0.5,-25)
+btn.Text = ""
 
--- A simple list of actions (the "script" steps)
-local actions = {
-    function()
-        print("Step 1: Hello!")
-        -- add your first action here
-    end,
-    function()
-        print("Step 2: Doing the next thing!")
-        -- add your second action here
-    end,
-    function()
-        print("Step 3: Last step!")
-        -- add your third action here
-    end
-}
-
--- Track the current step
-local currentStep = 1
-
-button.MouseButton1Click:Connect(function()
-    if currentStep <= #actions then
-        actions[currentStep]() -- execute the next action
-        currentStep = currentStep + 1
-    else
-        print("All steps completed!")
-    end
+btn.MouseButton1Click:Connect(function()
+    -- your action here
 end)
